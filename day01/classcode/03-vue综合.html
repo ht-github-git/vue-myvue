@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03</title>
+</head>
+<body>
+    <div id="app">
+        <a @click="" :href=src>去百度</a>
+        <a @click="fn1" href="http://www.baidu.com">去百度</a>
+        <a @click="fn2(num,$event)" href="http://www.baidu.com">去百度</a>
+        <a @click.stop.prevent href="http://www.baidu.com">去百度</a>
+    </div>
+
+
+    <div id="box">
+        <ul>
+            <li v-for='item in list'>{{item}}</li>
+            <li v-for='(value,prop) in obj'>{{prop}}:{{value}}</li>
+            <li v-for='item in students' :key='item.id'>姓名：{{item.name}}，年纪：{{item.age}}，描述：{{item.desc}}</li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    const vm = new Vue({
+        el: '#app',
+        data:{
+            num:111,
+            src:"http://www.baidu.com"
+        },
+        methods:{
+            fn1(e){
+                e.preventDefault()
+            },
+            fn2(str,e){
+                e.preventDefault()
+                console.log(str);
+                
+            }
+        }
+    })
+
+
+    const vm2 = new Vue({
+        el:'#box',
+        data:{
+            list: ['张飞', '貂蝉', '吕布', '甄姬'],
+            obj: {
+                name: '三姨太',
+                age: 19,
+                desc: '温柔贤惠, 会跳舞'
+              },
+              students: [
+            { id: 1, name: '小红1', age: 20, desc: '很好学' },
+            { id: 2, name: '小红2', age: 21, desc: '很好学' },
+            { id: 3, name: '小红3', age: 22, desc: '很好学' },
+            { id: 4, name: '小明', age: 23, desc: '很爱玩' },
+            { id: 5, name: '小红5', age: 24, desc: '很好学' }
+            ]
+        }
+    })
+    </script>
+</body>
+</html>

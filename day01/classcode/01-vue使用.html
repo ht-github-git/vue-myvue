@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>01</title>
+    </head>
+    <body>
+        <div id="app">
+            {{ msg.slice(0,1).toUpperCase() + msg.slice(1) }}
+            {{obj.name}}
+            {{obj.age > 18 ? obj.big : obj.small}}
+            <a href="#"  v-html="title">点击</a>
+        </div>
+        <script src="./vue.js"></script>
+        <script>
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    title: '<i>嘿嘿</i>',
+                    age: 12,
+                    obj: {
+                        name: '老铁',
+                        age: 48,
+                        desc: '没毛病',
+                        big: '长大了',
+                        small: '小屁孩'
+                    }
+                }
+            })
+            vm.msg = 'hello'
+            
+        </script>
+    </body>
+</html>

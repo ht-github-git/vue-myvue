@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-if='isshow'>
+            <button @click='reg'>{{hello}}</button>
+        </h1>
+        <h1 v-else>
+            <button @click='reg'>{{msg}}</button>
+        </h1>
+
+        <h1 v-if='age >= 18'>打麻将</h1>
+        <h1 v-else-if='age >= 30'>看动漫</h1>
+        <h1 v-else>打王者</h1>
+
+        <button @click='isshow = !isshow'>控制isshow的值改变隐藏和显示</button>
+        <button @click='fn'>控制函数改变</button>
+        <button  @click='fn1(num)'>给函数传参数</button>
+        <button @mouseenter='fn2'>移入</button>
+        <h1 v-show="isshow">我是内容</h1>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                hello: 'hello,vip',
+                num: 100,
+                msg: '来吧',
+                isshow: true,
+                age:12
+            },
+            methods:{
+                reg(){
+                    prompt('输入账户名')
+                },
+                fn(){
+                    this.isshow = !this.isshow
+                },
+                fn1(n){
+                    console.log(n);
+                },
+                fn2(){
+                    console.log(111);
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
