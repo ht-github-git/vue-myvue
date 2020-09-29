@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            {{msg}}
+            <input type="text" v-model.trim="msg"><hr>
+            <input type="text" v-model.number="num"> {{ num }} <br><br>
+            <select v-model='hobbyId'>
+                <option value="1">打王者</option>
+                <option value="2">打穿越火线</option>
+                <option value="3">打吃鸡</option>
+            </select>
+            <textarea v-model='msg'></textarea>
+            <input type="checkbox" v-model="isSingle" checked>是否单身
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    hobbyId:2,
+                    isSingle:true,
+                    num:123
+                }
+            })
+        </script>
+    </body>
+</html>

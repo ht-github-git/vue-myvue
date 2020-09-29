@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>01</title>
+        <style>
+            .base{
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+            }
+            .pink{
+                background-color: pink;
+            }
+            .big{
+                width: 200px;
+                height: 200px;
+            }
+            .sky{
+                background-color: skyblue;
+            }
+            .small{
+                width: 50px;
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div class="base" :class='{pink:isPink,big:isBig}'>{{msg}}</div>
+            <div class="base" :class='obj'>{{msg}}</div>
+            <div class="base" :class='arr'>{{msg}}</div>
+            <div style="width: 100px;height: 100px;background-color: yellow;"></div>
+            <div :style='{width:"100px",height:"100px",backgroundColor:"purple"}'></div>
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    isPink:true,
+                    isBig:true,
+                    obj:{
+                        small:true,
+                        sky:true
+                    },
+                    arr:['small','pink']
+                },
+            })
+        </script>
+    </body>
+</html>

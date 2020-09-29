@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{ msg.split('').reverse().join('-') }}</h1>
+            <h1>{{ msg }}</h1>
+            <h1>{{ msg | ss }}</h1>
+            <h1>{{ reverseMsg }}</h1>
+            <h1>{{ reverse() }}</h1>
+          </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            Vue.filter('ss',function (value) { 
+                return value.split('').reverse().join('')
+             })
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue'
+                },
+                computed:{
+                    reverseMsg(){
+                        return this.msg.split('').reverse().join('')
+                    }
+                },
+                methods: {
+                    reverse(){
+                        return this.msg.split('').reverse().join('')
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

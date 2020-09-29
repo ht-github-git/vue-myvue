@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="./index.css" rel="stylesheet">
+</head>
+<style>
+    .red{
+        color: red;
+    }
+    .search{
+        width: 300px;
+        margin: 20px 0;
+    }
+</style>
+<body>
+  <div id="app">
+    <div class="container">
+        <input v-model='key' v-focus type="text" class="form-control search" placeholder="请输入搜索关键字">
+        <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>资产名称</th>
+            <th>价格</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for='(item,index) in showList' :key='item.id'>
+            <td>{{index + 1}}</td>
+            <td>{{item.name}}</td>
+            <td :class='{red:item.price >= 100}'>{{item.price | qian}}</td>
+            <td><a href="javascript:;" @click='del(item.id)'>删除</a></td>
+          </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">资产总价: {{total | qian}}元</td>
+            </tr>
+        </tfoot>
+      </table>
+      
+      <!-- 添加资产 -->
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="资产名称" v-model.trim='name'/>
+          </div>&nbsp;&nbsp;
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="资产价格" v-model.number='money'/>
+          </div>
+        </div>&nbsp;&nbsp;
+        <button class="btn btn-primary" @click.prevent='add'>添加资产</button>
+      </form>
+    </div>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+      // 目标：
+      // 1. 把表格数据显示出来
+      // 2. 实现删除功能
+      // 3. 标注：如果价格超过100，标红色显示。
+      // 4. 添加功能
+      
+      // list: [
+      //     { id: 1, name: '外套', price: 99 },
+      //     { id: 2, name: '裤子', price: 34 },
+      //     { id: 3, name: '鞋', price: 25.4 },
+      //     { id: 4, name: '头发', price: 199 }
+      // ]
+        Vue.filter('qian',function (value) { 
+          return '￥' + value.toFixed(2)
+       })
+       Vue.directive('focus',{
+           inserted(el){
+            el.focus()
+           }
+       })
+      const vm = new Vue({
+        el:'#app',
+        data: {
+            name: '',
+            money: 0,
+            key: '',
+             list: [
+                { id: 1, name: '外套', price: 99 },
+                { id: 2, name: '裤子', price: 34 },
+                { id: 3, name: '鞋', price: 25.4 },
+                { id: 4, name: '头发', price: 199 }
+            ]
+        },
+        methods: {
+            del(id){
+                return this.list = this.list.filter(item => item.id != id)
+            },
+            add(){
+                if (this.money === '' || this.money <= 0 || this.name === '') return
+                this.list.push({
+                    id: +new Date(), name: this.name, price: this.money
+                })
+                this.name = ''
+                this.money = 0
+            }
+        },
+        computed: {
+            total(){
+                let total = 0
+                this.showList.forEach(item => total+=item.price)                
+                return total
+            },
+            showList(){
+                return this.list.filter(item => !!item.name.includes(this.key))
+            }
+        }
+
+
+
+
+
+    })
+      
+  </script>
+</body>
+</html>
