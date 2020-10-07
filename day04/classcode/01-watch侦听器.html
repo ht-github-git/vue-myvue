@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>
+                {{ msg }}
+                <br>
+                {{str}}
+                <br>
+                {{obj.name}}
+                <br>
+                {{obj1.name}}
+            </h1>
+            <button @click="fn">改值</button>
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    str: 'hi',
+                    obj: {
+                        name: 'ht'
+                    },
+                    obj1:{
+                        name: 'zs',
+                        age: 18
+                    }
+                },
+                methods: {
+                    fn(){
+                        this.msg = 'zs',
+                        this.obj.name = 'ls',
+                        this.obj1.name = 'haha',
+                        this.str = 'zl'
+                    }
+                },
+                watch: {
+                    msg(newValue){
+                        console.log('新值：' + newValue);                        
+                    },
+                    str(newValue,oldValue){
+                        console.log('新a:' + newValue,'旧a：'+oldValue);
+                    },
+                    'obj.name'(newValue,oldValue){
+                        console.log('新：'+newValue,'旧：' +oldValue);
+                    },
+                    obj1:{
+                        deep:true,
+                        handler(newValue){
+                            console.log('改了');
+                            
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

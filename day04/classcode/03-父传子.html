@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>03</title>
+        <style>
+            #app {
+              width: 400px;
+              height: 400px;
+              background-color: pink;
+            }
+      
+            .son {
+              width: 300px;
+              height: 200px;
+              background-color: skyblue;
+            }
+          </style>
+    </head>
+    <body>
+        <div id="app">
+            <son :house='house' car='法拉利' :money='money'></son>
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            Vue.component('son',{
+                template:`
+                <div class="son">
+                    <h3>我是子组件</h3>
+                    <p>传过来的数据: {{ house }} - {{ car }} - {{ money }} - {{ desc }}</p>
+                </div>
+                
+                `,
+                props: ['house','car','money']
+            })
+
+
+
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    house: '新疆海景房',
+                    money: 10000
+                }
+            })
+        </script>
+    </body>
+</html>
