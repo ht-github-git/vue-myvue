@@ -107,21 +107,16 @@
         },
         computed: {
             total(){
-                let total = 0
-                this.showList.forEach(item => total+=item.price)                
-                return total
+                // let total = 0
+                // this.showList.forEach(item => total+=item.price)                
+                // return total
+                return this.showList.reduce((add,item,index,arr) => add + item.price , 0)
             },
             showList(){
-                return this.list.filter(item => !!item.name.includes(this.key))
+                return this.list.filter(item => item.name.includes(this.key))
             }
         }
-
-
-
-
-
     })
-      
   </script>
 </body>
 </html>
