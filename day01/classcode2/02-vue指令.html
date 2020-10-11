@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>02</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1 v-text='msg2' v-html='msg'></h1>
+            <h1 v-if='flag'>v-if</h1>
+            <h1 v-show='flag'>v-show</h1>
+            <h2 v-if='age>30'>老年disco</h2>
+            <h2 v-else-if='age>18'>打王者</h2>
+            <h2 v-else>玩泥巴</h2>
+
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            //1.v-if：动态删除和创建元素，v-show：动态控制css样式实现元素的隐藏和显示
+            //2.频繁切换使用v-show,要么隐藏要么显示使用v-if
+            //
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    msg2: 'hi',
+                    flag:true,
+                    age:20
+                }
+            })
+        </script>
+    </body>
+</html>

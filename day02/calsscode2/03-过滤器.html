@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{ msg | upper}}</h1>
+            <h1>{{ date1 | time('YYYY年MM月DD日 HH:mm:ss') }}</h1>
+            <h1>{{ date2 | times }}</h1>
+        </div>
+        <script src="./moment.js"></script>
+        <script src="./vue.js"></script>
+        <script>
+    // 1. 定义过滤器
+    // Vue.filter(过滤器名字, 处理字符串函数)
+    // (1) 处理函数的返回值, 就是将来处理完成的结果
+    // (2) 处理函数的第一个参数, 都是需要处理的字符串
+
+    // 2. 使用过滤器
+    // {{ msg | 过滤器名字 }}
+            // let str = 'YYYY-MMM-DD HH:mm:ss'
+            Vue.filter('upper',function (value) { 
+                return value.slice(0,1).toUpperCase()+value.slice(1)
+             })
+             Vue.filter('time',function (value,str) { 
+                 return moment(value).format(str)
+              })
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    date1: 1601348075835,
+                    date2: 1201348075835,
+                },
+                filters:{
+                    times(value){
+                        return moment(value).format('YYYY-MM-DD HH:mm:ss')
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

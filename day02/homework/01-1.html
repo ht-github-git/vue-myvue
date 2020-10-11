@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01-1</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+  .red {
+    color: red;
+  }
+  .search {
+    width: 300px;
+    margin: 20px 0;
+  }
+</style>
+<body>
+  <div id="app">
+    <div class="container">
+      
+        <!-- 输入框 -->
+        <input v-autofocus type="text" class="form-control search" placeholder="请输入搜索关键字">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>资产名称</th>
+            <th>价格</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>宝马</td>
+            <td>20000</td>
+            <td><a href="javascript:;">删除</a></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- 添加资产 -->
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="资产名称" />
+          </div>&nbsp;&nbsp;
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="资产价格" />
+          </div>
+        </div>&nbsp;&nbsp;
+        <button class="btn btn-primary">添加资产</button>
+      </form>
+    </div>
+  </div>
+  <script>
+      // 目标：
+      // 1. 把表格数据显示出来
+      // 2. 实现删除功能
+      // 3. 标注：如果价格超过100，标红色显示。
+      // 4. 添加功能
+      
+      // list: [
+      //     { id: 1, name: '外套', price: 99 },
+      //     { id: 2, name: '裤子', price: 34 },
+      //     { id: 3, name: '鞋', price: 25.4 },
+      //     { id: 4, name: '头发', price: 199 }
+      // ]
+  </script>
+</body>
+</html>

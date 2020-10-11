@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>03</title>
+    </head>
+    <body>
+        <div id="app">
+            <a @click='fn("zs",$event)' href="http://www.baidu.com">去百度</a>
+            <a @click.stop.prevent='fn1' href="http://www.baidu.com">去百度1</a>
+            <ul><li v-for='(item,index) in list'>{{index}}.{{item}}</li></ul>
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            
+      // vue中获取事件对象
+      // 1. 注册事件没有传参 @事件名="fn", 直接通过形参, 即可获取
+      // 2. 注册事件传参了   @事件名="fn(参数, $event)", 需要通过 $event 获取 e
+      // 注意规范: 能用const尽可能都用const, 发现值要变了, 再用let,const申明的obj常量可以改属性内容，但是不能改地址
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    list: ['张飞', '貂蝉', '吕布', '甄姬'],
+                },
+                methods: {
+                    fn(str,e){
+                        e.preventDefault();
+                        console.log(str);
+                        
+                    },
+                    fn1(){
+                        console.log(111);
+                        
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

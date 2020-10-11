@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>测试题</title>
+    <style>
+      .my-subject {
+        border: 1px solid #000;
+        width: 300px;
+        margin: 10px;
+        padding: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h4>测试题</h4>
+        <my-test 
+        @submit-ans='submitAns' 
+        v-for='item in list' 
+        :key='item.id' 
+        :sonid='item.id'>
+        </my-test>
+      <p>
+        <span v-for='item in list' :key='item.id'>{{item.id}}.{{item.ans}}</span>
+      </p>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+    //1.每道题都独立，封装成组件
+    //2.希望题目数量能控制，用数组存储所有的题目的状态
+    //3.数字随机
+    //4.提交答案
+    Vue.component('my-test',{
+        template:`
+        <div class="my-subject">
+        <span>{{num1}}</span> + 
+        <span>{{num2}}</span> = 
+        <input type="text" class="sum" v-model.trim.number='sum' :disabled='this.isStop'>
+        <button @click='submit' :disabled='this.isStop'>提交</button>
+        </div>
+        `,data(){
+            return {
+                num1:parseInt(Math.random()*10),
+                num2:parseInt(Math.random()*10),
+                sum:'',
+                isStop: false
+            }
+        },
+        methods:{
+            submit(){
+                const result = (this.num1 + this.num2)=== this.sum ? '正确' : '错误'
+                // console.log(this.sonid,result,2333)
+                this.$emit('submit-ans',{
+                    id:this.sonid,
+                    ans:result
+                });
+                this.isStop = true
+            }
+        },
+        props: ['sonid']
+    })
+
+
+
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          list:[
+            {id:1, ans:'未完成'},
+            {id:2, ans:'未完成'},
+            {id:3, ans:'未完成'},
+            {id:4, ans:'未完成'},
+            {id:5, ans:'未完成'}
+          ]
+        },
+        methods:{
+            submitAns(obj){
+                //根据id改答案
+                const listitem = this.list.find(item=>item.id===obj.id)
+                // console.log(listitem,444,this.list)
+                listitem.ans = obj.ans
+            }
+        }
+      })
+    </script>
+  </body>
+</html>

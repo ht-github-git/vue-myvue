@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <style>
+            .router-link-active{
+                color: green;
+                font-size: 24px;
+                border: 2px solid yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <h3>下面是单页应用程序</h3>
+            <ul>
+                <li><router-link to="/home">首页</router-link></li>
+                <li><router-link to="/list">列表</router-link></li>
+                <li><router-link to="/login">登录</router-link></li>
+            </ul>
+            <router-view></router-view>
+        </div>
+
+        <script src="./vue.js"></script>
+        <script src="./vue-router.js"></script>
+        <script>
+            //1.下载
+            //2.引包
+            //3.创建路由实例
+            //4.挂载
+            //5.配置路由规则
+            //6.配置路由出口
+            const router = new VueRouter({
+            routes:[
+            { path: '/home', component: {template:`<div>我是首页</div>`} },
+            { path: '/list', component: {template:`<div>我是列表页</div>`} },
+            { path: '/login', component: {template:`<div>我是登录页</div>`} },
+            ]
+            })
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue'
+                },
+                router,
+            })
+        </script>
+    </body>
+</html>

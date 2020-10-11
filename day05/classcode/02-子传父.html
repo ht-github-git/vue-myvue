@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>父组件-{{money}}-{{car}}</h1>
+            <son @sb='fn'></son>
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            Vue.component('son',{
+                template:`
+                <div class='son'>
+                <h3>我是子组件-{{money}}</h3>
+                <button @click='send'>转钱</button>
+                
+                
+                </div>
+                `,
+                data(){
+                    return {
+                        money: '100块'
+                    }
+                },
+                methods: {
+                    send(){
+                        this.$emit('sb',this.money,'宝马车')
+                    }
+                }
+            })
+
+
+
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'hello vue',
+                    money:'',
+                    car:''
+                },
+                methods: {
+                    fn(money,car){
+                        // console.log(money,car);
+                        this.money=money;
+                        this.car=car
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

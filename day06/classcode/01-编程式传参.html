@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <h3>声明式导航部分</h3>
+            <router-link to="/home">首页</router-link> /
+            <router-link to="/login">登录</router-link> /
+            <router-link to="/list">列表</router-link> /
+            <router-link to="/user/3">3号用户-路由传参</router-link> /
+            <router-link to="/product?name=沈一帆">商品-查询传参</router-link>
+            <hr>
+
+
+
+
+            <h3>编程式导航</h3>
+            <button @click='goList'>去列表页不传参</button>
+            <button @click='goUser'>去用户页路由传参</button>
+            <button @click='goP'>去商品页查询传参</button>
+            <hr>
+            <router-view></router-view>
+        </div>
+        <script src="./vue.js"></script>
+        <script src="./vue-router.js"></script>
+        <script>
+        // 需求: 实现 首页 登录页 列表页的 单页切换
+        // 跳转和传参
+        // 跳转有两种方式:
+        // 1. 声明式导航, 通过 router-link 跳转     类似于 a 标签跳转
+        // (1) 不传参
+        //     <router-link to="/list">列表</router-link>
+        // (2) 路由传参 (动态路由)
+        //     <router-link to="/user/3">3号用户-路由传参</router-link>
+        //     获取参数: $route.params.id
+        // (3) 查询传参
+        //     <router-link to="/product?id=100">商品-查询传参</router-link>
+        //     获取参数: $route.query.id
+
+        // 2. 编程式导航
+        //    this.$router === router 就是大的那个唯一的路由实例
+        //    this.$router.push(路径)
+        //    router.push(路径)
+            const Home =  {template:`<div>我是首页</div>`} 
+            const router = new VueRouter({
+                routes:[
+                { path: '/', redirect: '/home'},
+                { path: '/home', component:Home},
+                { path: '/login', component: {template:`<div>我是登录页</div>`} },
+                { path: '/list', component: {template:`<div>我是列表页</div>`} },
+                { path: '/user/:id', component: {template:`<div>我是用户页-{{$route.params.id}}</div>`} },
+                { path: '/product', component: {template:`<div>我是商品页-{{$route.query.name}}</div>`} }
+
+
+
+
+                ]
+            })
+            const vm = new Vue({
+                el: '#app',
+                router,
+                data: {
+                    msg: 'hello vue'
+                },
+                methods: {
+                  goList(){
+                      this.$router.push('/list')
+                  },
+                  goUser(){
+                      this.$router.push('/user/10')
+                  },
+                  goP(){
+                      this.$router.push('/product?name=哈哈')
+                  } 
+                }
+            })
+        </script>
+    </body>
+</html>

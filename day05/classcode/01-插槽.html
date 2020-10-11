@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .modal {
+        width: 300px;
+        padding: 10px;
+        background-color: skyblue;
+        border: 3px solid #000;
+        border-radius: 30px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <modal title="警告">
+        <template v-slot:content>
+          <input type="text">
+          <input type="text">
+          <input type="text">
+          <input type="text">
+        </template>
+
+        <template v-slot:footer>          
+          <button>确认</button>
+          <button>取消</button>
+        </template>
+      </modal>
+
+      <modal title="再次警告">
+        <template v-slot:content>          
+          <p>我是一个段落</p>
+          <p>我是一个段落</p>
+          <p>我是一个段落</p>
+          <p>我是一个段落</p>
+          <p>我是一个段落</p>
+        </template>
+
+        <template v-slot:footer='obj'>
+          <button>{{obj.yes}}</button>
+          <button>{{obj.no}}</button>
+        </template>
+        <p>末尾匿名插槽</p>
+      </modal>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+      Vue.component('modal', {
+        template: `
+          <div class="modal">
+            <div className="title">
+              <h3>{{ title }}</h3>  
+            </div>
+            <div className="content">
+              <slot name='content'></slot>
+            </div>
+            <div className="bottom">
+              <slot name='footer' :yes='yes' :no='no'></slot>
+            </div>
+            <slot></slot>
+          </div>
+        `,
+        props: ['title'],
+        data(){
+          return {
+            yes:'是',
+            no:'否'
+          }
+        }
+      })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'hello vue'
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <h1>{{obj.name}}</h1>
+        <h1>{{obj.age > 18 ? '大人' : '小孩'}}</h1>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        //1.vue是一个渐进式的javascript框架
+        //2.vue是一种MVVM模式的框架
+        //3.步骤，下载=》引包=》创建实例
+        //4.Vue的构造函数, 首字母大写
+        //5.el不能指定成 body 或者 html
+        //6.{{}}插值表达式中可以用三元表达式，不能直接用if for，会有v-for,v-if之类的可以要用
+        //7.不能再标签中使用插值表达式
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello',
+                obj:{
+                    name:'zs',
+                    age:19
+                }
+            }
+            
+
+
+
+
+
+        })
+    </script>
+</body>
+</html>
