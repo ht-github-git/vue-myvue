@@ -110,7 +110,6 @@ export default {
 <style>
 
 </style>
-
 ```
 
 2. 在App.vue中引入该组件
@@ -350,7 +349,6 @@ const router = new VueRouter({
 <script>
 export default {}
 </script>
-
 ```
 
 
